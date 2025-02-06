@@ -1,0 +1,7 @@
+Flask
+pandas
+nltk
+Sastrawi
+flask-cors
+scikit-learn
+gunicorn
