@@ -39,9 +39,12 @@ Best cross-validation accuracy: 95.67%
 
 ### 🔥 Visualizations
 
-- **Classification Report:**  
+- **Classification Report:**
+
   ![Classification Report SVM](./assets/images/mfsvc/classification-report.png)
-- **Confusion Matrix:**  
+
+- **Confusion Matrix:**
+
   ![Confusion Matrix SVM](./assets/images/mfsvc/confusion-matrix.png)
 
 ## 📉 MFNb Model (Naïve Bayes)
@@ -73,9 +76,12 @@ Best cross-validation accuracy: 95.23%
 
 ### 🔥 Visualizations
 
-- **Classification Report:**  
+- **Classification Report:**
+
   ![Classification Report NB](./assets/images/mfnb/classification-report.png)
-- **Confusion Matrix:**  
+
+- **Confusion Matrix:**
+
   ![Confusion Matrix NB](./assets/images/mfnb/confusion-matrix.png)
 
 ---
@@ -147,53 +153,43 @@ curl -X POST \
 
 ## 💻 Running Meowsenti Manually
 
-### 1️⃣ Clone the Repository
+### Clone the Repository
 
 ```sh
 git clone https://github.com/mframadann/meowsenti.git && cd meowsenti
 ```
 
-### 2️⃣ Set Up a Virtual Environment
+### Set Up a Virtual Environment
 
 ```sh
 python3 -m venv .venv
 source .venv/bin/activate
 ```
 
-### 3️⃣ Install Dependencies
+### Install Dependencies
 
 ```sh
 pip install --no-cache-dir -r requirements.txt
 ```
 
-### 4️⃣ Start the Application
+### Start the Application
 
 ```sh
 python app.py
 ```
 
-### 🔬 Testing the API (Same as Above)
-
 ---
 
 ## 📜 API Documentation
 
-For detailed API documentation, visit: [Mframadan Labs](https://labs.mframadan.dev)
-
-## 🚀 Try the Live App
-
-You can also try Meowsenti directly on Hugging Face Spaces:
+For detailed API documentation, visit: [Mframadan Labs](https://labs.mframadan.dev). You can also try Meowsenti directly on Hugging Face Spaces:
 
 🔗 [Meowsenti on Hugging Face](https://huggingface.co/spaces/mframadann/meowsenti)
 
 ## ⚠️ Note
 
-This model works **only for Indonesian text**.
-
----
-
-## 💡 Let's Connect!!
-
-Thanks for visiting! Feel free to connect with me:
+This model works **only for Indonesian text and last updated of analytics report is based on model observation in oct 2024**. Thanks for visiting! Feel free to connect with me:
 
 🔗 [LinkedIn](https://linkedin.com/in/muhamad-firly-ramadan)
+
+---
