@@ -4,111 +4,101 @@ Meowsenti is a simple application designed to analyze sentiment in Indonesian mo
 
 ## 🤖 Model Overview
 
-This system is built using two popular Natural Language Processing algorithms: Multinomial Naive Bayes and Support Vector Machine. It has been trained on a dataset of 13,527 reviews from the BRImo mobile banking application.
+This system is built using two popular Natural Language Processing algorithms: **Multinomial Naïve Bayes** and **Support Vector Machine (SVM)**. The model has been trained on a dataset of **13,527 reviews** from the BRImo mobile banking application.
 
-The dataset is split into 60% for training the model and 40% for testing it.
+The dataset is split into **60% for training** and **40% for testing**.
 
-## MFSvc Model
+## 🔍 MFSvc Model (Support Vector Machine)
 
-The MFSvc model is optimized through parameter search using GridSearchCV. Below is an example of the parameter grid used in this model:
+The **MFSvc** model is optimized using GridSearchCV. Below is the parameter grid used:
 
-| Parameters       | Value          |
+| Parameter        | Values         |
 | ---------------- | -------------- |
 | **C**            | 0.1, 1, 10     |
 | **kernel**       | linear, rbf    |
 | **gamma**        | scale, auto    |
 | **class_weight** | balanced, None |
 
-After the parameter search, the training accuracy was verified using 10-fold cross-validation. The best parameter configuration for training the model is:
+After hyperparameter tuning, the best configuration is:
 
 ```shell
 Best parameters found: {'C': 10, 'class_weight': 'balanced', 'gamma': 'scale', 'kernel': 'rbf'}
 Best cross-validation accuracy: 95.67%
 ```
 
-The test classification report is shown below:
+### 📊 Evaluation Metrics
 
-![Classification Report SVM](./assets/images/mfsvc/classification-report.png)
+| Class            | Precision | Recall | F1-score |
+| ---------------- | --------- | ------ | -------- |
+| **Positive (1)** | 0.9226    | 0.9179 | 0.9202   |
+| **Negative (0)** | 0.6281    | 0.6281 | 0.6281   |
+| **Neutral (2)**  | 0.7348    | 0.7436 | 0.7392   |
 
-The confusion matrix from the test process is also displayed in a heatmap visualization:
+- **Train Accuracy:** 95.67%
+- **Test Accuracy:** 83.11%
 
-![Confusion Matrix SVM](./assets/images/mfsvc/confusion-matrix.png)
+### 🔥 Visualizations
 
-## MFNb Model
+- **Classification Report:**  
+  ![Classification Report SVM](./assets/images/mfsvc/classification-report.png)
+- **Confusion Matrix:**  
+  ![Confusion Matrix SVM](./assets/images/mfsvc/confusion-matrix.png)
 
-The MFNb model is optimized through parameter search using GridSearchCV. Below is an example of the parameter grid used for this model:
+## 📉 MFNb Model (Naïve Bayes)
 
-| Parameters    | Value            |
+The **MFNb** model is also optimized using GridSearchCV. Below is the parameter grid used:
+
+| Parameter     | Values           |
 | ------------- | ---------------- |
 | **alpha**     | 0.01, 0.1, 1, 10 |
 | **fit_prior** | True, False      |
 
-After the parameter search, the training accuracy was verified using 10-fold cross-validation. The best parameter configuration for training the model is:
+After hyperparameter tuning, the best configuration is:
 
 ```shell
 Best parameters found: {'alpha': 0.01, 'fit_prior': True}
 Best cross-validation accuracy: 95.23%
 ```
 
-The test classification report is shown below:
-
-![Classification Report NB](./assets/images/mfnb/classification-report.png)
-
-The confusion matrix from the test process is also displayed in a heatmap visualization:
-
-![Confusion Matrix NB](./assets/images/mfnb/confusion-matrix.png)
-
-## 📊 Summary of Evaluation Metrics
-
-To further evaluate the performance, metrics such as Accuracy, Precision, Recall, and F1-Score were used as additional indicators to understand how both models handle each sentiment class (Negative, Positive, and Neutral).
-
-### 📈 Support Vector Machine (SVM)
-
-The evaluation metrics for the SVM model are summarized below:
+### 📊 Evaluation Metrics
 
 | Class            | Precision | Recall | F1-score |
 | ---------------- | --------- | ------ | -------- |
-| **1 (Positive)** | 0.9226    | 0.9179 | 0.9202   |
-| **0 (Negative)** | 0.6281    | 0.6281 | 0.6281   |
-| **2 (Neutral)**  | 0.7348    | 0.7436 | 0.7392   |
-
-- **Train Accuracy:** 95.67%
-- **Test Accuracy:** 83.11%
-
-### 📉 Naïve Bayes (NB)
-
-The evaluation metrics for the Naïve Bayes model are summarized below:
-
-| Class            | Precision | Recall | F1-score |
-| ---------------- | --------- | ------ | -------- |
-| **1 (Positive)** | 0.9012    | 0.9338 | 0.9172   |
-| **0 (Negative)** | 0.6507    | 0.6006 | 0.6246   |
-| **2 (Neutral)**  | 0.7386    | 0.7085 | 0.7232   |
+| **Positive (1)** | 0.9012    | 0.9338 | 0.9172   |
+| **Negative (0)** | 0.6507    | 0.6006 | 0.6246   |
+| **Neutral (2)**  | 0.7386    | 0.7085 | 0.7232   |
 
 - **Train Accuracy:** 95.23%
 - **Test Accuracy:** 82.77%
 
+### 🔥 Visualizations
+
+- **Classification Report:**  
+  ![Classification Report NB](./assets/images/mfnb/classification-report.png)
+- **Confusion Matrix:**  
+  ![Confusion Matrix NB](./assets/images/mfnb/confusion-matrix.png)
+
 ---
 
-# How to run meowsenti locally?
+## 🛠️ How to Run Meowsenti Locally
 
-## 🐳 Using Docker Container
+### 🐳 Using Docker
 
-First, u need to pull this image and run:
+First, pull the image and run:
 
-```shell
-# Puling the image
-docker pull mframadann/meowsenti # using default tag "latest"
+```sh
+# Pull the Docker image
+docker pull mframadann/meowsenti
+
+# Run the container
 docker run -d --name sentiment-app -p 5001:7860 mframadann/meowsenti
 ```
 
-### How to try the app?
+### 🔬 Testing the API
 
-Open your api testing tools like postman, insomnia etc.
-Here the example of request:
+Use tools like **Postman** or **Insomnia**, or send a request via **cURL**:
 
-```shell
-#There are two types of models. You can select the model type, such as MFNb for Naive Bayes and MFSvc for Support Vector Machine in model field.
+```sh
 curl -X POST \
   http://localhost:5001/api/v1/analyze-sentiment \
   -H "Content-Type: application/json" \
@@ -117,37 +107,37 @@ curl -X POST \
            {"review": "Bagus banget aplikasinya"},
            {"review": "Aplikasi apa ini, jelek banget idih"},
            {"review": "Cukup membantu saya bertransaksi"},
-           {"review": "Mantap banget euy applikasinya"}
+           {"review": "Mantap banget euy aplikasinya"}
         ],
         "model": "MFNb"
     }'
 ```
 
-And the app will be give response like:
+### 📡 API Response
 
 ```json
 {
   "data": {
     "sentiment": [
       {
-        "alg_type": "Naive Bayes",
+        "alg_type": "Naïve Bayes",
         "kind_of_sentiment": "Positive",
         "review": "Bagus banget aplikasinya"
       },
       {
-        "alg_type": "Naive Bayes",
+        "alg_type": "Naïve Bayes",
         "kind_of_sentiment": "Negative",
         "review": "Aplikasi apa ini, jelek banget idih"
       },
       {
-        "alg_type": "Naive Bayes",
+        "alg_type": "Naïve Bayes",
         "kind_of_sentiment": "Neutral",
         "review": "Cukup membantu saya bertransaksi"
       },
       {
-        "alg_type": "Naive Bayes",
+        "alg_type": "Naïve Bayes",
         "kind_of_sentiment": "Positive",
-        "review": "Mantap banget euy applikasinya"
+        "review": "Mantap banget euy aplikasinya"
       }
     ]
   },
@@ -155,95 +145,55 @@ And the app will be give response like:
 }
 ```
 
-## 💻 Clone Repository
+## 💻 Running Meowsenti Manually
 
-First u need to clone this repository by running
+### 1️⃣ Clone the Repository
 
 ```sh
 git clone https://github.com/mframadann/meowsenti.git && cd meowsenti
 ```
 
-Then, u need to create virtual environtment:
+### 2️⃣ Set Up a Virtual Environment
 
 ```sh
 python3 -m venv .venv
 source .venv/bin/activate
 ```
 
-You also need install the requirements depedencies:
+### 3️⃣ Install Dependencies
 
 ```sh
 pip install --no-cache-dir -r requirements.txt
 ```
 
-Finally, u can start the meowsenti by running:
+### 4️⃣ Start the Application
 
 ```sh
 python app.py
 ```
 
-### How to try the app?
+### 🔬 Testing the API (Same as Above)
 
-Open your api testing tools like postman, insomnia etc.
-Here the example of request:
+---
 
-```shell
-#There are two types of models. You can select the model type, such as MFNb for Naive Bayes and MFSvc for Support Vector Machine in model field.
-curl -X POST \
-  http://localhost:7860/api/v1/analyze-sentiment \
-  -H "Content-Type: application/json" \
-  -d '{
-        "reviews": [
-           {"review": "Bagus banget aplikasinya"},
-           {"review": "Aplikasi apa ini, jelek banget idih"},
-           {"review": "Cukup membantu saya bertransaksi"},
-           {"review": "Mantap banget euy applikasinya"}
-        ],
-        "model": "MFNb"
-    }'
-```
+## 📜 API Documentation
 
-And the app will be give response like:
+For detailed API documentation, visit: [Mframadan Labs](https://labs.mframadan.dev)
 
-```json
-{
-  "data": {
-    "sentiment": [
-      {
-        "alg_type": "Naive Bayes",
-        "kind_of_sentiment": "Positive",
-        "review": "Bagus banget aplikasinya"
-      },
-      {
-        "alg_type": "Naive Bayes",
-        "kind_of_sentiment": "Negative",
-        "review": "Aplikasi apa ini, jelek banget idih"
-      },
-      {
-        "alg_type": "Naive Bayes",
-        "kind_of_sentiment": "Neutral",
-        "review": "Cukup membantu saya bertransaksi"
-      },
-      {
-        "alg_type": "Naive Bayes",
-        "kind_of_sentiment": "Positive",
-        "review": "Mantap banget euy applikasinya"
-      }
-    ]
-  },
-  "status": "success"
-}
-```
+## 🚀 Try the Live App
 
-# Api Documentation
+You can also try Meowsenti directly on Hugging Face Spaces:
 
-For more comperhensf api docs you can visit my labs: [Mframadan Labs](https://labs.mframadan.dev)
+🔗 [Meowsenti on Hugging Face](https://huggingface.co/spaces/mframadann/meowsenti)
 
-# More Resources
+## ⚠️ Note
 
-The app also production ready if u just want to try the app directly.
-Visit the my huggingface space: [My space](https://huggingface.co/spaces/mframadann/meowsenti).
+This model works **only for Indonesian text**.
 
-# Noted: This model is work on indonesian language only.
+---
 
-Thankyou for visit, lets connected with me: [LinkedIn](https://linkedin.com/in/muhamad-firly-ramadan)
+## 💡 Let's Connect!!
+
+Thanks for visiting! Feel free to connect with me:
+
+🔗 [LinkedIn](https://linkedin.com/in/muhamad-firly-ramadan)
