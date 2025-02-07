@@ -175,7 +175,7 @@ pip install --no-cache-dir -r requirements.txt
 ### Start the Application
 
 ```sh
-python app.py
+python app.py ## run on http://localhost:7860
 ```
 
 ---
