@@ -1,0 +1,4 @@
+*.md
+assets/*
+.venv
+.labs
